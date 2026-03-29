@@ -41,7 +41,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBXqJ8vZ9QZ8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8Z8',
+    apiKey: 'AIzaSyA7VZ_FlDaEywfBublX8gWZ9vU4wLjT_Tk',
     appId: '1:627999904421:web:9829c36b5547e0d7ccf34c',
     messagingSenderId: '627999904421',
     projectId: 'loft-71a46',
