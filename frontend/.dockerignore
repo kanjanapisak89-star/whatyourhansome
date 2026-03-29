@@ -1,0 +1,41 @@
+# Version control
+.git
+.gitignore
+
+# Flutter build output (rebuilt inside Docker)
+build/
+
+# Native platform directories (not needed for web build)
+android/
+ios/
+linux/
+macos/
+windows/
+
+# IDE / editor config
+.idea/
+.vscode/
+*.iml
+
+# Dart/Flutter tool caches
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+
+# Test files
+test/
+
+# Local environment — secrets must be injected at runtime, not baked into image
+.env
+
+# Documentation / non-build files
+*.md
+*.txt
+SPLASH_SETUP.md
+SPLASH_VISUAL_GUIDE.txt
+generate_placeholder_assets.md
+
+# OS artifacts
+.DS_Store
+Thumbs.db
