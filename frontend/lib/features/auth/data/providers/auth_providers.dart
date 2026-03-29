@@ -105,7 +105,7 @@ class AuthController {
       if (result.status != LoginStatus.success) return null;
 
       final OAuthCredential credential = 
-          FacebookAuthProvider.credential(result.accessToken!.token);
+          FacebookAuthProvider.credential(result.accessToken!.tokenString);
 
       final userCredential = await _auth.signInWithCredential(credential);
       final user = userCredential.user;
