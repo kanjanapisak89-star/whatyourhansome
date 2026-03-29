@@ -12,8 +12,8 @@ RUN flutter pub get
 # Copy source code
 COPY . .
 
-# Build web app
-RUN flutter build web --release --web-renderer canvaskit
+# Build web app (removed --web-renderer flag as it's deprecated in newer Flutter versions)
+RUN flutter build web --release
 
 # Runtime stage - serve with nginx
 FROM nginx:alpine
