@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -55,11 +56,18 @@ class _LoftAppState extends State<LoftApp> {
 
   Future<void> _initializeApp() async {
     try {
-      // Load environment variables
+      // Load environment variables - handle web vs mobile differently
       try {
-        await dotenv.load(fileName: ".env");
+        if (kIsWeb) {
+          // For web, use compile-time environment variables or defaults
+          // Environment variables should be set at build time for web
+          debugPrint('Web environment: Using compile-time configuration');
+        } else {
+          // For mobile, load from .env file
+          await dotenv.load(fileName: ".env");
+        }
       } catch (e) {
-        debugPrint('Warning: .env file not found. Using defaults.');
+        debugPrint('Warning: Environment configuration issue. Using defaults.');
       }
       
       // Initialize Firebase
