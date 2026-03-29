@@ -1,0 +1,37 @@
+# Flutter Native Splash Configuration
+# Run: flutter pub run flutter_native_splash:create
+
+flutter_native_splash:
+  # Background color (dark theme)
+  color: "#000000"
+  
+  # Splash image (centered)
+  image: assets/images/splash_logo.png
+  
+  # Branding image (bottom of screen)
+  branding: assets/images/splash_branding.png
+  branding_mode: bottom
+  
+  # Android 12+ specific
+  android_12:
+    image: assets/images/splash_logo.png
+    color: "#000000"
+    icon_background_color: "#000000"
+  
+  # Platform specific
+  android: true
+  ios: true
+  web: true
+  
+  # iOS specific
+  ios_content_mode: center
+  
+  # Web specific
+  web_image_mode: center
+  
+  # Fullscreen mode
+  fullscreen: true
+  
+  # Info.plist settings for iOS
+  info_plist_files:
+    - 'ios/Runner/Info.plist'

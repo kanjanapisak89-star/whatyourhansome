@@ -1,0 +1,222 @@
+╔════════════════════════════════════════════════════════════════╗
+║                    LOFT SPLASH SCREEN DESIGN                   ║
+╚════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────┐
+│                                                              │
+│                    ⚫ Status Bar (Black)                     │
+│                                                              │
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│                                                              │
+│                                                              │
+│                                                              │
+│                        ┌──────────┐                          │
+│                        │          │                          │
+│                        │    🔵    │  ← Gradient Box          │
+│                        │    L     │     (Blue → Green)       │
+│                        │          │     120x120              │
+│                        └──────────┘                          │
+│                                                              │
+│                          LOFT                                │
+│                     (32sp, Bold, White)                      │
+│                                                              │
+│                 Architects of the Next Era                   │
+│                   (14sp, Gray, Spaced)                       │
+│                                                              │
+│                                                              │
+│                           ⭕                                  │
+│                    (Loading Spinner)                         │
+│                      (Blue, 3px)                             │
+│                                                              │
+│                                                              │
+│                                                              │
+│                                                              │
+│                                                              │
+│                    ⚫ Navigation Bar (Black)                 │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════
+
+COLOR PALETTE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Background:        ████ #000000 (Pure Black)
+Primary Blue:      ████ #0066FF (Vibrant Blue)
+Accent Green:      ████ #00D9A3 (Mint Green)
+Text Primary:      ████ #FFFFFF (White)
+Text Secondary:    ████ #999999 (Gray)
+
+═══════════════════════════════════════════════════════════════
+
+ANIMATION SEQUENCE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0ms     ┃ Native splash appears (instant)
+        ┃ • Black background
+        ┃ • Your logo (if provided)
+        ┃
+100ms   ┃ Flutter engine loads
+        ┃
+200ms   ┃ Flutter splash widget appears
+        ┃ • Fade in starts (opacity 0 → 1)
+        ┃ • Scale animation starts (0.8 → 1.0)
+        ┃
+600ms   ┃ Fade in complete
+        ┃ • Logo fully visible
+        ┃ • Text fully visible
+        ┃
+1500ms  ┃ Animation complete
+        ┃ • Loading spinner visible
+        ┃
+2000ms  ┃ Minimum display time reached
+        ┃ • Initialization complete
+        ┃ • Transition to main app
+        ┃
+2100ms  ┃ Main app visible
+        ┃ • Feed screen or Login screen
+
+═══════════════════════════════════════════════════════════════
+
+GRADIENT LOGO DETAIL:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    ┌────────────────────────┐
+    │ 🔵 #0066FF (Top Left)  │
+    │         ↘              │
+    │           L            │  ← White "L" letter
+    │         ↙              │     64sp, Bold
+    │ 🟢 #00D9A3 (Bottom Rt) │
+    └────────────────────────┘
+    
+    • Rounded corners: 24px
+    • Size: 120x120 (responsive)
+    • Gradient: Linear, diagonal
+    • Letter: Centered, white
+
+═══════════════════════════════════════════════════════════════
+
+RESPONSIVE SIZING:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Design Base: 375x812 (iPhone 11 Pro)
+
+Element              Size (sp/w/h)    Responsive
+─────────────────────────────────────────────────
+Logo Box             120.w x 120.w    ✓
+Letter "L"           64.sp            ✓
+App Name             32.sp            ✓
+Tagline              14.sp            ✓
+Spacing (Logo-Name)  24.h             ✓
+Spacing (Name-Tag)   8.h              ✓
+Spacing (Tag-Load)   48.h             ✓
+Loading Spinner      40.w x 40.w      ✓
+
+═══════════════════════════════════════════════════════════════
+
+PLATFORM VARIATIONS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+iOS:
+  • Respects safe areas (notch, home indicator)
+  • Status bar: Light content
+  • Smooth transition to app
+
+Android:
+  • Edge-to-edge display
+  • Status bar: Transparent, light icons
+  • Navigation bar: Black, light icons
+  • Android 12+: Uses new splash API
+
+Web:
+  • Centered content
+  • Responsive to browser size
+  • Fast load time
+
+═══════════════════════════════════════════════════════════════
+
+STATES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. LOADING (Normal)
+   ┌─────────────────┐
+   │      Logo       │
+   │      Loft       │
+   │    Tagline      │
+   │       ⭕        │ ← Spinner
+   └─────────────────┘
+
+2. ERROR (If initialization fails)
+   ┌─────────────────┐
+   │       ⚠️        │
+   │ Failed to init  │
+   │   [Retry]       │ ← Button
+   └─────────────────┘
+
+═══════════════════════════════════════════════════════════════
+
+COMPARISON WITH UI DESIGN:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Splash Screen          →    Main App (image_0.png)
+─────────────────────────────────────────────────
+Black background       →    Black background ✓
+Blue accent            →    Blue buttons ✓
+White text             →    White text ✓
+Gray secondary         →    Gray metadata ✓
+Modern, minimal        →    Modern, minimal ✓
+Dark theme             →    Dark theme ✓
+
+═══════════════════════════════════════════════════════════════
+
+ACCESSIBILITY:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ High contrast (White on Black)
+✓ Large text (32sp app name)
+✓ Clear loading indicator
+✓ No flashing/strobing
+✓ Respects system font scaling
+✓ Screen reader compatible
+
+═══════════════════════════════════════════════════════════════
+
+FILES INVOLVED:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Configuration:
+  • flutter_native_splash.yaml
+
+Code:
+  • lib/core/widgets/splash_screen.dart
+  • lib/main.dart
+
+Assets (Optional):
+  • assets/images/splash_logo.png
+  • assets/images/splash_branding.png
+  • assets/icons/app_icon.png
+
+Generated (Auto):
+  • android/app/src/main/res/drawable*/
+  • ios/Runner/Assets.xcassets/
+  • web/splash/
+
+═══════════════════════════════════════════════════════════════
+
+TESTING CHECKLIST:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+□ Native splash shows immediately on launch
+□ Flutter splash animates smoothly
+□ Colors match design (#000000, #0066FF, #00D9A3)
+□ Text is readable and properly sized
+□ Loading spinner is visible and animates
+□ Minimum 2-second display time
+□ Smooth transition to main app
+□ Error state shows and retry works
+□ Works on different screen sizes
+□ Status bar is styled correctly
+□ No white flash or blank screen
+
+═══════════════════════════════════════════════════════════════

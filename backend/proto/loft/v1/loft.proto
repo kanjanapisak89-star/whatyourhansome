@@ -1,0 +1,319 @@
+syntax = "proto3";
+
+package loft.v1;
+
+option go_package = "github.com/medlab/loft/backend/gen/proto/loft/v1;loftv1";
+
+// =====================================================
+// ENUMS
+// =====================================================
+
+enum UserRole {
+  USER_ROLE_UNSPECIFIED = 0;
+  USER_ROLE_GUEST = 1;
+  USER_ROLE_MEMBER = 2;
+  USER_ROLE_ADMIN = 3;
+  USER_ROLE_OWNER = 4;
+}
+
+enum UserStatus {
+  USER_STATUS_UNSPECIFIED = 0;
+  USER_STATUS_ACTIVE = 1;
+  USER_STATUS_BLOCKED = 2;
+  USER_STATUS_DELETED = 3;
+}
+
+enum QuestionStatus {
+  QUESTION_STATUS_UNSPECIFIED = 0;
+  QUESTION_STATUS_PENDING = 1;
+  QUESTION_STATUS_ANSWERED = 2;
+  QUESTION_STATUS_ARCHIVED = 3;
+}
+
+// =====================================================
+// MODELS
+// =====================================================
+
+message User {
+  string id = 1;
+  string firebase_uid = 2;
+  string email = 3;
+  string display_name = 4;
+  string avatar_url = 5;
+  string provider = 6;
+  UserRole role = 7;
+  UserStatus status = 8;
+  int64 created_at_unix = 9;
+  int64 last_login_at_unix = 10;
+}
+
+message UserPublic {
+  string id = 1;
+  string display_name = 2;
+  string avatar_url = 3;
+}
+
+message Post {
+  string id = 1;
+  string author_id = 2;
+  string title = 3;
+  string content = 4;
+  string image_url = 5;
+  bool published = 6;
+  int32 view_count = 7;
+  int64 created_at_unix = 8;
+  int64 updated_at_unix = 9;
+  
+  // Populated from joins
+  UserPublic author = 10;
+  PostStats stats = 11;
+  bool user_has_reacted = 12;
+}
+
+message PostStats {
+  int32 reaction_count = 1;
+  int32 comment_count = 2;
+  int32 view_count = 3;
+}
+
+message Comment {
+  string id = 1;
+  string post_id = 2;
+  string user_id = 3;
+  string content = 4;
+  bool is_deleted = 5;
+  int64 created_at_unix = 6;
+  int64 updated_at_unix = 7;
+  
+  // Populated from joins
+  UserPublic author = 8;
+}
+
+message BoardQuestion {
+  string id = 1;
+  string user_id = 2;
+  string title = 3;
+  string content = 4;
+  QuestionStatus status = 5;
+  string admin_response = 6;
+  int64 created_at_unix = 7;
+  int64 updated_at_unix = 8;
+  int64 responded_at_unix = 9;
+  
+  // Populated from joins
+  UserPublic author = 10;
+}
+
+// =====================================================
+// REQUEST/RESPONSE MESSAGES
+// =====================================================
+
+// ----- Feed -----
+message GetFeedRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+message GetFeedResponse {
+  repeated Post posts = 1;
+  int32 total_count = 2;
+  bool has_more = 3;
+}
+
+// ----- Post -----
+message GetPostRequest {
+  string post_id = 1;
+}
+
+message GetPostResponse {
+  Post post = 1;
+}
+
+message CreatePostRequest {
+  string title = 1;
+  string content = 2;
+  string image_url = 3;
+  bool published = 4;
+}
+
+message CreatePostResponse {
+  Post post = 1;
+}
+
+message UpdatePostRequest {
+  string post_id = 1;
+  string title = 2;
+  string content = 3;
+  string image_url = 4;
+  bool published = 5;
+}
+
+message UpdatePostResponse {
+  Post post = 1;
+}
+
+message DeletePostRequest {
+  string post_id = 1;
+}
+
+message DeletePostResponse {
+  bool success = 1;
+}
+
+// ----- Comments -----
+message GetCommentsRequest {
+  string post_id = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+message GetCommentsResponse {
+  repeated Comment comments = 1;
+  int32 total_count = 2;
+  bool has_more = 3;
+}
+
+message CreateCommentRequest {
+  string post_id = 1;
+  string content = 2;
+}
+
+message CreateCommentResponse {
+  Comment comment = 1;
+}
+
+message DeleteCommentRequest {
+  string comment_id = 1;
+  string reason = 2;
+}
+
+message DeleteCommentResponse {
+  bool success = 1;
+}
+
+// ----- Reactions -----
+message ToggleReactionRequest {
+  string post_id = 1;
+}
+
+message ToggleReactionResponse {
+  bool is_reacted = 1;
+  int32 new_count = 2;
+}
+
+// ----- Board Questions -----
+message CreateBoardQuestionRequest {
+  string title = 1;
+  string content = 2;
+}
+
+message CreateBoardQuestionResponse {
+  BoardQuestion question = 1;
+}
+
+message GetMyQuestionsRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+message GetMyQuestionsResponse {
+  repeated BoardQuestion questions = 1;
+  int32 total_count = 2;
+  bool has_more = 3;
+}
+
+message GetBoardQuestionsRequest {
+  QuestionStatus status = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+message GetBoardQuestionsResponse {
+  repeated BoardQuestion questions = 1;
+  int32 total_count = 2;
+  bool has_more = 3;
+}
+
+message RespondToQuestionRequest {
+  string question_id = 1;
+  string response = 2;
+  QuestionStatus new_status = 3;
+}
+
+message RespondToQuestionResponse {
+  BoardQuestion question = 1;
+}
+
+// ----- User Management -----
+message BlockUserRequest {
+  string user_id = 1;
+  string reason = 2;
+}
+
+message BlockUserResponse {
+  bool success = 1;
+}
+
+message UnblockUserRequest {
+  string user_id = 1;
+}
+
+message UnblockUserResponse {
+  bool success = 1;
+}
+
+// ----- Auth -----
+message SyncUserRequest {
+  string firebase_uid = 1;
+  string email = 2;
+  string display_name = 3;
+  string avatar_url = 4;
+  string provider = 5;
+}
+
+message SyncUserResponse {
+  User user = 1;
+}
+
+message GetCurrentUserRequest {}
+
+message GetCurrentUserResponse {
+  User user = 1;
+}
+
+// =====================================================
+// SERVICES
+// =====================================================
+
+// Public Service (No Auth Required - Guests Allowed)
+service PublicService {
+  rpc GetFeed(GetFeedRequest) returns (GetFeedResponse);
+  rpc GetPost(GetPostRequest) returns (GetPostResponse);
+  rpc GetComments(GetCommentsRequest) returns (GetCommentsResponse);
+}
+
+// Member Service (Auth Required)
+service MemberService {
+  rpc ToggleReaction(ToggleReactionRequest) returns (ToggleReactionResponse);
+  rpc CreateComment(CreateCommentRequest) returns (CreateCommentResponse);
+  rpc CreateBoardQuestion(CreateBoardQuestionRequest) returns (CreateBoardQuestionResponse);
+  rpc GetMyQuestions(GetMyQuestionsRequest) returns (GetMyQuestionsResponse);
+  rpc GetCurrentUser(GetCurrentUserRequest) returns (GetCurrentUserResponse);
+}
+
+// Admin Service (Admin/Owner Only)
+service AdminService {
+  rpc CreatePost(CreatePostRequest) returns (CreatePostResponse);
+  rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
+  rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
+  rpc DeleteComment(DeleteCommentRequest) returns (DeleteCommentResponse);
+  rpc BlockUser(BlockUserRequest) returns (BlockUserResponse);
+  rpc UnblockUser(UnblockUserRequest) returns (UnblockUserResponse);
+  rpc GetBoardQuestions(GetBoardQuestionsRequest) returns (GetBoardQuestionsResponse);
+  rpc RespondToQuestion(RespondToQuestionRequest) returns (RespondToQuestionResponse);
+}
+
+// Auth Service (User Sync)
+service AuthService {
+  rpc SyncUser(SyncUserRequest) returns (SyncUserResponse);
+}
