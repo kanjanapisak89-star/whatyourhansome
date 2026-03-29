@@ -12,6 +12,12 @@ RUN flutter pub get
 # Copy source code
 COPY . .
 
+# Enable web platform
+RUN flutter config --enable-web
+
+# Create web platform files if not exists
+RUN flutter create . --platforms web
+
 # Build web app (removed --web-renderer flag as it's deprecated in newer Flutter versions)
 RUN flutter build web --release
 
