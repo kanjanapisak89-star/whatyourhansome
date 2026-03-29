@@ -7,7 +7,10 @@ class ApiClient {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   ApiClient() {
-    final baseUrl = dotenv.env['API_BASE_URL'] ?? 'http://localhost:8080';
+    // Resolve API base URL: .env (dev) → --dart-define (prod) → localhost fallback.
+    const dartDefineUrl = String.fromEnvironment('API_BASE_URL');
+    final baseUrl = dotenv.env['API_BASE_URL'] ??
+        (dartDefineUrl.isNotEmpty ? dartDefineUrl : 'http://localhost:8080');
     
     _dio = Dio(
       BaseOptions(
