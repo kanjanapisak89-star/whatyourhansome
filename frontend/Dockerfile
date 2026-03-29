@@ -3,6 +3,10 @@ FROM ghcr.io/cirruslabs/flutter:stable AS build
 
 WORKDIR /app
 
+# Set build-time environment variables
+ARG API_BASE_URL=http://localhost:8080
+ENV API_BASE_URL=$API_BASE_URL
+
 # Copy pubspec files
 COPY pubspec.* ./
 
@@ -11,6 +15,9 @@ RUN flutter pub get
 
 # Copy source code
 COPY . .
+
+# Create .env file from environment variable
+RUN echo "API_BASE_URL=$API_BASE_URL" > .env
 
 # Enable web platform
 RUN flutter config --enable-web
