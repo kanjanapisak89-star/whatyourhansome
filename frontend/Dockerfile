@@ -13,8 +13,11 @@ COPY pubspec.* ./
 # Get dependencies
 RUN flutter pub get
 
-# Copy source code
+# Copy source code (exclude .env files)
 COPY . .
+
+# Remove any .env files to prevent them from being included in web build
+RUN find . -name ".env" -type f -delete
 
 # For web builds, environment variables should be set at compile time
 # or passed as constants. We don't create .env files for web deployment.
