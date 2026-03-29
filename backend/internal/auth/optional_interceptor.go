@@ -12,8 +12,8 @@ import (
 // Invalid or missing tokens proceed as guests. Blocked users still get AppUser attached so the client can distinguish state.
 func NewOptionalUserInterceptor(opts InterceptorOptions) connect.UnaryInterceptorFunc {
 	withOptional := map[string]struct{}{
-		loftv1connect.PublicServiceListPostsProcedure: {},
-		loftv1connect.PublicServiceGetPostProcedure:   {},
+		loftv1connect.PublicServiceGetFeedProcedure: {},
+		loftv1connect.PublicServiceGetPostProcedure: {},
 	}
 
 	return func(next connect.UnaryFunc) connect.UnaryFunc {

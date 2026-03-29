@@ -21,14 +21,21 @@ type InterceptorOptions struct {
 // NewUnaryInterceptor enforces auth for MemberService and AdminService procedures.
 func NewUnaryInterceptor(opts InterceptorOptions) connect.UnaryInterceptorFunc {
 	memberProcedures := map[string]struct{}{
-		loftv1connect.MemberServiceTogglePostReactionProcedure: {},
-		loftv1connect.MemberServiceCreatePostCommentProcedure:  {},
-		loftv1connect.MemberServiceRecordPostShareProcedure:    {},
-		loftv1connect.MemberServiceCreateBoardThreadProcedure:  {},
+		loftv1connect.MemberServiceToggleReactionProcedure:       {},
+		loftv1connect.MemberServiceCreateCommentProcedure:        {},
+		loftv1connect.MemberServiceCreateBoardQuestionProcedure:  {},
+		loftv1connect.MemberServiceGetMyQuestionsProcedure:       {},
+		loftv1connect.MemberServiceGetCurrentUserProcedure:       {},
 	}
 	adminProcedures := map[string]struct{}{
-		loftv1connect.AdminServiceModerateDeleteCommentProcedure: {},
-		loftv1connect.AdminServiceSetUserBlockedProcedure:        {},
+		loftv1connect.AdminServiceCreatePostProcedure:            {},
+		loftv1connect.AdminServiceUpdatePostProcedure:            {},
+		loftv1connect.AdminServiceDeletePostProcedure:            {},
+		loftv1connect.AdminServiceDeleteCommentProcedure:         {},
+		loftv1connect.AdminServiceBlockUserProcedure:             {},
+		loftv1connect.AdminServiceUnblockUserProcedure:           {},
+		loftv1connect.AdminServiceGetBoardQuestionsProcedure:     {},
+		loftv1connect.AdminServiceRespondToQuestionProcedure:     {},
 	}
 
 	return func(next connect.UnaryFunc) connect.UnaryFunc {

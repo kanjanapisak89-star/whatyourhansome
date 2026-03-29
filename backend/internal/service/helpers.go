@@ -15,19 +15,6 @@ func unix(t time.Time) int64 {
 	return t.Unix()
 }
 
-func protoPublishStatus(s string) loftv1.PublishStatus {
-	switch s {
-	case "draft":
-		return loftv1.PublishStatus_PUBLISH_STATUS_DRAFT
-	case "published":
-		return loftv1.PublishStatus_PUBLISH_STATUS_PUBLISHED
-	case "archived":
-		return loftv1.PublishStatus_PUBLISH_STATUS_ARCHIVED
-	default:
-		return loftv1.PublishStatus_PUBLISH_STATUS_UNSPECIFIED
-	}
-}
-
 func userPublic(id, name string, headline, avatar *string) *loftv1.UserPublic {
 	u := &loftv1.UserPublic{
 		Id:          id,

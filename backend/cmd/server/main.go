@@ -39,7 +39,7 @@ func main() {
 		syncerOpts.Syncer = auth.NewUserSyncer(pool)
 	}
 
-	loftSvc := &service.Loft{Pool: pool}
+	loftSvc := service.NewLoft(pool)
 	interceptors := connect.WithInterceptors(
 		auth.NewOptionalUserInterceptor(syncerOpts),
 		auth.NewUnaryInterceptor(syncerOpts),

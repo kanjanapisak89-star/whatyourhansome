@@ -27,6 +27,8 @@ const (
 	MemberServiceName = "loft.v1.MemberService"
 	// AdminServiceName is the fully-qualified name of the AdminService service.
 	AdminServiceName = "loft.v1.AdminService"
+	// AuthServiceName is the fully-qualified name of the AuthService service.
+	AuthServiceName = "loft.v1.AuthService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -37,74 +39,57 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// PublicServiceListCategoriesProcedure is the fully-qualified name of the PublicService's
-	// ListCategories RPC.
-	PublicServiceListCategoriesProcedure = "/loft.v1.PublicService/ListCategories"
-	// PublicServiceListPostsProcedure is the fully-qualified name of the PublicService's ListPosts RPC.
-	PublicServiceListPostsProcedure = "/loft.v1.PublicService/ListPosts"
+	// PublicServiceGetFeedProcedure is the fully-qualified name of the PublicService's GetFeed RPC.
+	PublicServiceGetFeedProcedure = "/loft.v1.PublicService/GetFeed"
 	// PublicServiceGetPostProcedure is the fully-qualified name of the PublicService's GetPost RPC.
 	PublicServiceGetPostProcedure = "/loft.v1.PublicService/GetPost"
-	// PublicServiceGetHomeContentProcedure is the fully-qualified name of the PublicService's
-	// GetHomeContent RPC.
-	PublicServiceGetHomeContentProcedure = "/loft.v1.PublicService/GetHomeContent"
-	// PublicServiceListBoardsProcedure is the fully-qualified name of the PublicService's ListBoards
+	// PublicServiceGetCommentsProcedure is the fully-qualified name of the PublicService's GetComments
 	// RPC.
-	PublicServiceListBoardsProcedure = "/loft.v1.PublicService/ListBoards"
-	// PublicServiceListBoardThreadsProcedure is the fully-qualified name of the PublicService's
-	// ListBoardThreads RPC.
-	PublicServiceListBoardThreadsProcedure = "/loft.v1.PublicService/ListBoardThreads"
-	// PublicServiceListPostCommentsProcedure is the fully-qualified name of the PublicService's
-	// ListPostComments RPC.
-	PublicServiceListPostCommentsProcedure = "/loft.v1.PublicService/ListPostComments"
-	// MemberServiceTogglePostReactionProcedure is the fully-qualified name of the MemberService's
-	// TogglePostReaction RPC.
-	MemberServiceTogglePostReactionProcedure = "/loft.v1.MemberService/TogglePostReaction"
-	// MemberServiceCreatePostCommentProcedure is the fully-qualified name of the MemberService's
-	// CreatePostComment RPC.
-	MemberServiceCreatePostCommentProcedure = "/loft.v1.MemberService/CreatePostComment"
-	// MemberServiceRecordPostShareProcedure is the fully-qualified name of the MemberService's
-	// RecordPostShare RPC.
-	MemberServiceRecordPostShareProcedure = "/loft.v1.MemberService/RecordPostShare"
-	// MemberServiceCreateBoardThreadProcedure is the fully-qualified name of the MemberService's
-	// CreateBoardThread RPC.
-	MemberServiceCreateBoardThreadProcedure = "/loft.v1.MemberService/CreateBoardThread"
-	// AdminServiceModerateDeleteCommentProcedure is the fully-qualified name of the AdminService's
-	// ModerateDeleteComment RPC.
-	AdminServiceModerateDeleteCommentProcedure = "/loft.v1.AdminService/ModerateDeleteComment"
-	// AdminServiceSetUserBlockedProcedure is the fully-qualified name of the AdminService's
-	// SetUserBlocked RPC.
-	AdminServiceSetUserBlockedProcedure = "/loft.v1.AdminService/SetUserBlocked"
-)
-
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	publicServiceServiceDescriptor                    = v1.File_proto_loft_v1_loft_proto.Services().ByName("PublicService")
-	publicServiceListCategoriesMethodDescriptor       = publicServiceServiceDescriptor.Methods().ByName("ListCategories")
-	publicServiceListPostsMethodDescriptor            = publicServiceServiceDescriptor.Methods().ByName("ListPosts")
-	publicServiceGetPostMethodDescriptor              = publicServiceServiceDescriptor.Methods().ByName("GetPost")
-	publicServiceGetHomeContentMethodDescriptor       = publicServiceServiceDescriptor.Methods().ByName("GetHomeContent")
-	publicServiceListBoardsMethodDescriptor           = publicServiceServiceDescriptor.Methods().ByName("ListBoards")
-	publicServiceListBoardThreadsMethodDescriptor     = publicServiceServiceDescriptor.Methods().ByName("ListBoardThreads")
-	publicServiceListPostCommentsMethodDescriptor     = publicServiceServiceDescriptor.Methods().ByName("ListPostComments")
-	memberServiceServiceDescriptor                    = v1.File_proto_loft_v1_loft_proto.Services().ByName("MemberService")
-	memberServiceTogglePostReactionMethodDescriptor   = memberServiceServiceDescriptor.Methods().ByName("TogglePostReaction")
-	memberServiceCreatePostCommentMethodDescriptor    = memberServiceServiceDescriptor.Methods().ByName("CreatePostComment")
-	memberServiceRecordPostShareMethodDescriptor      = memberServiceServiceDescriptor.Methods().ByName("RecordPostShare")
-	memberServiceCreateBoardThreadMethodDescriptor    = memberServiceServiceDescriptor.Methods().ByName("CreateBoardThread")
-	adminServiceServiceDescriptor                     = v1.File_proto_loft_v1_loft_proto.Services().ByName("AdminService")
-	adminServiceModerateDeleteCommentMethodDescriptor = adminServiceServiceDescriptor.Methods().ByName("ModerateDeleteComment")
-	adminServiceSetUserBlockedMethodDescriptor        = adminServiceServiceDescriptor.Methods().ByName("SetUserBlocked")
+	PublicServiceGetCommentsProcedure = "/loft.v1.PublicService/GetComments"
+	// MemberServiceToggleReactionProcedure is the fully-qualified name of the MemberService's
+	// ToggleReaction RPC.
+	MemberServiceToggleReactionProcedure = "/loft.v1.MemberService/ToggleReaction"
+	// MemberServiceCreateCommentProcedure is the fully-qualified name of the MemberService's
+	// CreateComment RPC.
+	MemberServiceCreateCommentProcedure = "/loft.v1.MemberService/CreateComment"
+	// MemberServiceCreateBoardQuestionProcedure is the fully-qualified name of the MemberService's
+	// CreateBoardQuestion RPC.
+	MemberServiceCreateBoardQuestionProcedure = "/loft.v1.MemberService/CreateBoardQuestion"
+	// MemberServiceGetMyQuestionsProcedure is the fully-qualified name of the MemberService's
+	// GetMyQuestions RPC.
+	MemberServiceGetMyQuestionsProcedure = "/loft.v1.MemberService/GetMyQuestions"
+	// MemberServiceGetCurrentUserProcedure is the fully-qualified name of the MemberService's
+	// GetCurrentUser RPC.
+	MemberServiceGetCurrentUserProcedure = "/loft.v1.MemberService/GetCurrentUser"
+	// AdminServiceCreatePostProcedure is the fully-qualified name of the AdminService's CreatePost RPC.
+	AdminServiceCreatePostProcedure = "/loft.v1.AdminService/CreatePost"
+	// AdminServiceUpdatePostProcedure is the fully-qualified name of the AdminService's UpdatePost RPC.
+	AdminServiceUpdatePostProcedure = "/loft.v1.AdminService/UpdatePost"
+	// AdminServiceDeletePostProcedure is the fully-qualified name of the AdminService's DeletePost RPC.
+	AdminServiceDeletePostProcedure = "/loft.v1.AdminService/DeletePost"
+	// AdminServiceDeleteCommentProcedure is the fully-qualified name of the AdminService's
+	// DeleteComment RPC.
+	AdminServiceDeleteCommentProcedure = "/loft.v1.AdminService/DeleteComment"
+	// AdminServiceBlockUserProcedure is the fully-qualified name of the AdminService's BlockUser RPC.
+	AdminServiceBlockUserProcedure = "/loft.v1.AdminService/BlockUser"
+	// AdminServiceUnblockUserProcedure is the fully-qualified name of the AdminService's UnblockUser
+	// RPC.
+	AdminServiceUnblockUserProcedure = "/loft.v1.AdminService/UnblockUser"
+	// AdminServiceGetBoardQuestionsProcedure is the fully-qualified name of the AdminService's
+	// GetBoardQuestions RPC.
+	AdminServiceGetBoardQuestionsProcedure = "/loft.v1.AdminService/GetBoardQuestions"
+	// AdminServiceRespondToQuestionProcedure is the fully-qualified name of the AdminService's
+	// RespondToQuestion RPC.
+	AdminServiceRespondToQuestionProcedure = "/loft.v1.AdminService/RespondToQuestion"
+	// AuthServiceSyncUserProcedure is the fully-qualified name of the AuthService's SyncUser RPC.
+	AuthServiceSyncUserProcedure = "/loft.v1.AuthService/SyncUser"
 )
 
 // PublicServiceClient is a client for the loft.v1.PublicService service.
 type PublicServiceClient interface {
-	ListCategories(context.Context, *connect.Request[v1.ListCategoriesRequest]) (*connect.Response[v1.ListCategoriesResponse], error)
-	ListPosts(context.Context, *connect.Request[v1.ListPostsRequest]) (*connect.Response[v1.ListPostsResponse], error)
+	GetFeed(context.Context, *connect.Request[v1.GetFeedRequest]) (*connect.Response[v1.GetFeedResponse], error)
 	GetPost(context.Context, *connect.Request[v1.GetPostRequest]) (*connect.Response[v1.GetPostResponse], error)
-	GetHomeContent(context.Context, *connect.Request[v1.GetHomeContentRequest]) (*connect.Response[v1.GetHomeContentResponse], error)
-	ListBoards(context.Context, *connect.Request[v1.ListBoardsRequest]) (*connect.Response[v1.ListBoardsResponse], error)
-	ListBoardThreads(context.Context, *connect.Request[v1.ListBoardThreadsRequest]) (*connect.Response[v1.ListBoardThreadsResponse], error)
-	ListPostComments(context.Context, *connect.Request[v1.ListPostCommentsRequest]) (*connect.Response[v1.ListPostCommentsResponse], error)
+	GetComments(context.Context, *connect.Request[v1.GetCommentsRequest]) (*connect.Response[v1.GetCommentsResponse], error)
 }
 
 // NewPublicServiceClient constructs a client for the loft.v1.PublicService service. By default, it
@@ -116,47 +101,24 @@ type PublicServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewPublicServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) PublicServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	publicServiceMethods := v1.File_proto_loft_v1_loft_proto.Services().ByName("PublicService").Methods()
 	return &publicServiceClient{
-		listCategories: connect.NewClient[v1.ListCategoriesRequest, v1.ListCategoriesResponse](
+		getFeed: connect.NewClient[v1.GetFeedRequest, v1.GetFeedResponse](
 			httpClient,
-			baseURL+PublicServiceListCategoriesProcedure,
-			connect.WithSchema(publicServiceListCategoriesMethodDescriptor),
-			connect.WithClientOptions(opts...),
-		),
-		listPosts: connect.NewClient[v1.ListPostsRequest, v1.ListPostsResponse](
-			httpClient,
-			baseURL+PublicServiceListPostsProcedure,
-			connect.WithSchema(publicServiceListPostsMethodDescriptor),
+			baseURL+PublicServiceGetFeedProcedure,
+			connect.WithSchema(publicServiceMethods.ByName("GetFeed")),
 			connect.WithClientOptions(opts...),
 		),
 		getPost: connect.NewClient[v1.GetPostRequest, v1.GetPostResponse](
 			httpClient,
 			baseURL+PublicServiceGetPostProcedure,
-			connect.WithSchema(publicServiceGetPostMethodDescriptor),
+			connect.WithSchema(publicServiceMethods.ByName("GetPost")),
 			connect.WithClientOptions(opts...),
 		),
-		getHomeContent: connect.NewClient[v1.GetHomeContentRequest, v1.GetHomeContentResponse](
+		getComments: connect.NewClient[v1.GetCommentsRequest, v1.GetCommentsResponse](
 			httpClient,
-			baseURL+PublicServiceGetHomeContentProcedure,
-			connect.WithSchema(publicServiceGetHomeContentMethodDescriptor),
-			connect.WithClientOptions(opts...),
-		),
-		listBoards: connect.NewClient[v1.ListBoardsRequest, v1.ListBoardsResponse](
-			httpClient,
-			baseURL+PublicServiceListBoardsProcedure,
-			connect.WithSchema(publicServiceListBoardsMethodDescriptor),
-			connect.WithClientOptions(opts...),
-		),
-		listBoardThreads: connect.NewClient[v1.ListBoardThreadsRequest, v1.ListBoardThreadsResponse](
-			httpClient,
-			baseURL+PublicServiceListBoardThreadsProcedure,
-			connect.WithSchema(publicServiceListBoardThreadsMethodDescriptor),
-			connect.WithClientOptions(opts...),
-		),
-		listPostComments: connect.NewClient[v1.ListPostCommentsRequest, v1.ListPostCommentsResponse](
-			httpClient,
-			baseURL+PublicServiceListPostCommentsProcedure,
-			connect.WithSchema(publicServiceListPostCommentsMethodDescriptor),
+			baseURL+PublicServiceGetCommentsProcedure,
+			connect.WithSchema(publicServiceMethods.ByName("GetComments")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -164,23 +126,14 @@ func NewPublicServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 
 // publicServiceClient implements PublicServiceClient.
 type publicServiceClient struct {
-	listCategories   *connect.Client[v1.ListCategoriesRequest, v1.ListCategoriesResponse]
-	listPosts        *connect.Client[v1.ListPostsRequest, v1.ListPostsResponse]
-	getPost          *connect.Client[v1.GetPostRequest, v1.GetPostResponse]
-	getHomeContent   *connect.Client[v1.GetHomeContentRequest, v1.GetHomeContentResponse]
-	listBoards       *connect.Client[v1.ListBoardsRequest, v1.ListBoardsResponse]
-	listBoardThreads *connect.Client[v1.ListBoardThreadsRequest, v1.ListBoardThreadsResponse]
-	listPostComments *connect.Client[v1.ListPostCommentsRequest, v1.ListPostCommentsResponse]
+	getFeed     *connect.Client[v1.GetFeedRequest, v1.GetFeedResponse]
+	getPost     *connect.Client[v1.GetPostRequest, v1.GetPostResponse]
+	getComments *connect.Client[v1.GetCommentsRequest, v1.GetCommentsResponse]
 }
 
-// ListCategories calls loft.v1.PublicService.ListCategories.
-func (c *publicServiceClient) ListCategories(ctx context.Context, req *connect.Request[v1.ListCategoriesRequest]) (*connect.Response[v1.ListCategoriesResponse], error) {
-	return c.listCategories.CallUnary(ctx, req)
-}
-
-// ListPosts calls loft.v1.PublicService.ListPosts.
-func (c *publicServiceClient) ListPosts(ctx context.Context, req *connect.Request[v1.ListPostsRequest]) (*connect.Response[v1.ListPostsResponse], error) {
-	return c.listPosts.CallUnary(ctx, req)
+// GetFeed calls loft.v1.PublicService.GetFeed.
+func (c *publicServiceClient) GetFeed(ctx context.Context, req *connect.Request[v1.GetFeedRequest]) (*connect.Response[v1.GetFeedResponse], error) {
+	return c.getFeed.CallUnary(ctx, req)
 }
 
 // GetPost calls loft.v1.PublicService.GetPost.
@@ -188,35 +141,16 @@ func (c *publicServiceClient) GetPost(ctx context.Context, req *connect.Request[
 	return c.getPost.CallUnary(ctx, req)
 }
 
-// GetHomeContent calls loft.v1.PublicService.GetHomeContent.
-func (c *publicServiceClient) GetHomeContent(ctx context.Context, req *connect.Request[v1.GetHomeContentRequest]) (*connect.Response[v1.GetHomeContentResponse], error) {
-	return c.getHomeContent.CallUnary(ctx, req)
-}
-
-// ListBoards calls loft.v1.PublicService.ListBoards.
-func (c *publicServiceClient) ListBoards(ctx context.Context, req *connect.Request[v1.ListBoardsRequest]) (*connect.Response[v1.ListBoardsResponse], error) {
-	return c.listBoards.CallUnary(ctx, req)
-}
-
-// ListBoardThreads calls loft.v1.PublicService.ListBoardThreads.
-func (c *publicServiceClient) ListBoardThreads(ctx context.Context, req *connect.Request[v1.ListBoardThreadsRequest]) (*connect.Response[v1.ListBoardThreadsResponse], error) {
-	return c.listBoardThreads.CallUnary(ctx, req)
-}
-
-// ListPostComments calls loft.v1.PublicService.ListPostComments.
-func (c *publicServiceClient) ListPostComments(ctx context.Context, req *connect.Request[v1.ListPostCommentsRequest]) (*connect.Response[v1.ListPostCommentsResponse], error) {
-	return c.listPostComments.CallUnary(ctx, req)
+// GetComments calls loft.v1.PublicService.GetComments.
+func (c *publicServiceClient) GetComments(ctx context.Context, req *connect.Request[v1.GetCommentsRequest]) (*connect.Response[v1.GetCommentsResponse], error) {
+	return c.getComments.CallUnary(ctx, req)
 }
 
 // PublicServiceHandler is an implementation of the loft.v1.PublicService service.
 type PublicServiceHandler interface {
-	ListCategories(context.Context, *connect.Request[v1.ListCategoriesRequest]) (*connect.Response[v1.ListCategoriesResponse], error)
-	ListPosts(context.Context, *connect.Request[v1.ListPostsRequest]) (*connect.Response[v1.ListPostsResponse], error)
+	GetFeed(context.Context, *connect.Request[v1.GetFeedRequest]) (*connect.Response[v1.GetFeedResponse], error)
 	GetPost(context.Context, *connect.Request[v1.GetPostRequest]) (*connect.Response[v1.GetPostResponse], error)
-	GetHomeContent(context.Context, *connect.Request[v1.GetHomeContentRequest]) (*connect.Response[v1.GetHomeContentResponse], error)
-	ListBoards(context.Context, *connect.Request[v1.ListBoardsRequest]) (*connect.Response[v1.ListBoardsResponse], error)
-	ListBoardThreads(context.Context, *connect.Request[v1.ListBoardThreadsRequest]) (*connect.Response[v1.ListBoardThreadsResponse], error)
-	ListPostComments(context.Context, *connect.Request[v1.ListPostCommentsRequest]) (*connect.Response[v1.ListPostCommentsResponse], error)
+	GetComments(context.Context, *connect.Request[v1.GetCommentsRequest]) (*connect.Response[v1.GetCommentsResponse], error)
 }
 
 // NewPublicServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -225,64 +159,33 @@ type PublicServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewPublicServiceHandler(svc PublicServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	publicServiceListCategoriesHandler := connect.NewUnaryHandler(
-		PublicServiceListCategoriesProcedure,
-		svc.ListCategories,
-		connect.WithSchema(publicServiceListCategoriesMethodDescriptor),
-		connect.WithHandlerOptions(opts...),
-	)
-	publicServiceListPostsHandler := connect.NewUnaryHandler(
-		PublicServiceListPostsProcedure,
-		svc.ListPosts,
-		connect.WithSchema(publicServiceListPostsMethodDescriptor),
+	publicServiceMethods := v1.File_proto_loft_v1_loft_proto.Services().ByName("PublicService").Methods()
+	publicServiceGetFeedHandler := connect.NewUnaryHandler(
+		PublicServiceGetFeedProcedure,
+		svc.GetFeed,
+		connect.WithSchema(publicServiceMethods.ByName("GetFeed")),
 		connect.WithHandlerOptions(opts...),
 	)
 	publicServiceGetPostHandler := connect.NewUnaryHandler(
 		PublicServiceGetPostProcedure,
 		svc.GetPost,
-		connect.WithSchema(publicServiceGetPostMethodDescriptor),
+		connect.WithSchema(publicServiceMethods.ByName("GetPost")),
 		connect.WithHandlerOptions(opts...),
 	)
-	publicServiceGetHomeContentHandler := connect.NewUnaryHandler(
-		PublicServiceGetHomeContentProcedure,
-		svc.GetHomeContent,
-		connect.WithSchema(publicServiceGetHomeContentMethodDescriptor),
-		connect.WithHandlerOptions(opts...),
-	)
-	publicServiceListBoardsHandler := connect.NewUnaryHandler(
-		PublicServiceListBoardsProcedure,
-		svc.ListBoards,
-		connect.WithSchema(publicServiceListBoardsMethodDescriptor),
-		connect.WithHandlerOptions(opts...),
-	)
-	publicServiceListBoardThreadsHandler := connect.NewUnaryHandler(
-		PublicServiceListBoardThreadsProcedure,
-		svc.ListBoardThreads,
-		connect.WithSchema(publicServiceListBoardThreadsMethodDescriptor),
-		connect.WithHandlerOptions(opts...),
-	)
-	publicServiceListPostCommentsHandler := connect.NewUnaryHandler(
-		PublicServiceListPostCommentsProcedure,
-		svc.ListPostComments,
-		connect.WithSchema(publicServiceListPostCommentsMethodDescriptor),
+	publicServiceGetCommentsHandler := connect.NewUnaryHandler(
+		PublicServiceGetCommentsProcedure,
+		svc.GetComments,
+		connect.WithSchema(publicServiceMethods.ByName("GetComments")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/loft.v1.PublicService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case PublicServiceListCategoriesProcedure:
-			publicServiceListCategoriesHandler.ServeHTTP(w, r)
-		case PublicServiceListPostsProcedure:
-			publicServiceListPostsHandler.ServeHTTP(w, r)
+		case PublicServiceGetFeedProcedure:
+			publicServiceGetFeedHandler.ServeHTTP(w, r)
 		case PublicServiceGetPostProcedure:
 			publicServiceGetPostHandler.ServeHTTP(w, r)
-		case PublicServiceGetHomeContentProcedure:
-			publicServiceGetHomeContentHandler.ServeHTTP(w, r)
-		case PublicServiceListBoardsProcedure:
-			publicServiceListBoardsHandler.ServeHTTP(w, r)
-		case PublicServiceListBoardThreadsProcedure:
-			publicServiceListBoardThreadsHandler.ServeHTTP(w, r)
-		case PublicServiceListPostCommentsProcedure:
-			publicServiceListPostCommentsHandler.ServeHTTP(w, r)
+		case PublicServiceGetCommentsProcedure:
+			publicServiceGetCommentsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -292,40 +195,25 @@ func NewPublicServiceHandler(svc PublicServiceHandler, opts ...connect.HandlerOp
 // UnimplementedPublicServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedPublicServiceHandler struct{}
 
-func (UnimplementedPublicServiceHandler) ListCategories(context.Context, *connect.Request[v1.ListCategoriesRequest]) (*connect.Response[v1.ListCategoriesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.PublicService.ListCategories is not implemented"))
-}
-
-func (UnimplementedPublicServiceHandler) ListPosts(context.Context, *connect.Request[v1.ListPostsRequest]) (*connect.Response[v1.ListPostsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.PublicService.ListPosts is not implemented"))
+func (UnimplementedPublicServiceHandler) GetFeed(context.Context, *connect.Request[v1.GetFeedRequest]) (*connect.Response[v1.GetFeedResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.PublicService.GetFeed is not implemented"))
 }
 
 func (UnimplementedPublicServiceHandler) GetPost(context.Context, *connect.Request[v1.GetPostRequest]) (*connect.Response[v1.GetPostResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.PublicService.GetPost is not implemented"))
 }
 
-func (UnimplementedPublicServiceHandler) GetHomeContent(context.Context, *connect.Request[v1.GetHomeContentRequest]) (*connect.Response[v1.GetHomeContentResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.PublicService.GetHomeContent is not implemented"))
-}
-
-func (UnimplementedPublicServiceHandler) ListBoards(context.Context, *connect.Request[v1.ListBoardsRequest]) (*connect.Response[v1.ListBoardsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.PublicService.ListBoards is not implemented"))
-}
-
-func (UnimplementedPublicServiceHandler) ListBoardThreads(context.Context, *connect.Request[v1.ListBoardThreadsRequest]) (*connect.Response[v1.ListBoardThreadsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.PublicService.ListBoardThreads is not implemented"))
-}
-
-func (UnimplementedPublicServiceHandler) ListPostComments(context.Context, *connect.Request[v1.ListPostCommentsRequest]) (*connect.Response[v1.ListPostCommentsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.PublicService.ListPostComments is not implemented"))
+func (UnimplementedPublicServiceHandler) GetComments(context.Context, *connect.Request[v1.GetCommentsRequest]) (*connect.Response[v1.GetCommentsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.PublicService.GetComments is not implemented"))
 }
 
 // MemberServiceClient is a client for the loft.v1.MemberService service.
 type MemberServiceClient interface {
-	TogglePostReaction(context.Context, *connect.Request[v1.TogglePostReactionRequest]) (*connect.Response[v1.TogglePostReactionResponse], error)
-	CreatePostComment(context.Context, *connect.Request[v1.CreatePostCommentRequest]) (*connect.Response[v1.CreatePostCommentResponse], error)
-	RecordPostShare(context.Context, *connect.Request[v1.RecordPostShareRequest]) (*connect.Response[v1.RecordPostShareResponse], error)
-	CreateBoardThread(context.Context, *connect.Request[v1.CreateBoardThreadRequest]) (*connect.Response[v1.CreateBoardThreadResponse], error)
+	ToggleReaction(context.Context, *connect.Request[v1.ToggleReactionRequest]) (*connect.Response[v1.ToggleReactionResponse], error)
+	CreateComment(context.Context, *connect.Request[v1.CreateCommentRequest]) (*connect.Response[v1.CreateCommentResponse], error)
+	CreateBoardQuestion(context.Context, *connect.Request[v1.CreateBoardQuestionRequest]) (*connect.Response[v1.CreateBoardQuestionResponse], error)
+	GetMyQuestions(context.Context, *connect.Request[v1.GetMyQuestionsRequest]) (*connect.Response[v1.GetMyQuestionsResponse], error)
+	GetCurrentUser(context.Context, *connect.Request[v1.GetCurrentUserRequest]) (*connect.Response[v1.GetCurrentUserResponse], error)
 }
 
 // NewMemberServiceClient constructs a client for the loft.v1.MemberService service. By default, it
@@ -337,29 +225,36 @@ type MemberServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewMemberServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) MemberServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	memberServiceMethods := v1.File_proto_loft_v1_loft_proto.Services().ByName("MemberService").Methods()
 	return &memberServiceClient{
-		togglePostReaction: connect.NewClient[v1.TogglePostReactionRequest, v1.TogglePostReactionResponse](
+		toggleReaction: connect.NewClient[v1.ToggleReactionRequest, v1.ToggleReactionResponse](
 			httpClient,
-			baseURL+MemberServiceTogglePostReactionProcedure,
-			connect.WithSchema(memberServiceTogglePostReactionMethodDescriptor),
+			baseURL+MemberServiceToggleReactionProcedure,
+			connect.WithSchema(memberServiceMethods.ByName("ToggleReaction")),
 			connect.WithClientOptions(opts...),
 		),
-		createPostComment: connect.NewClient[v1.CreatePostCommentRequest, v1.CreatePostCommentResponse](
+		createComment: connect.NewClient[v1.CreateCommentRequest, v1.CreateCommentResponse](
 			httpClient,
-			baseURL+MemberServiceCreatePostCommentProcedure,
-			connect.WithSchema(memberServiceCreatePostCommentMethodDescriptor),
+			baseURL+MemberServiceCreateCommentProcedure,
+			connect.WithSchema(memberServiceMethods.ByName("CreateComment")),
 			connect.WithClientOptions(opts...),
 		),
-		recordPostShare: connect.NewClient[v1.RecordPostShareRequest, v1.RecordPostShareResponse](
+		createBoardQuestion: connect.NewClient[v1.CreateBoardQuestionRequest, v1.CreateBoardQuestionResponse](
 			httpClient,
-			baseURL+MemberServiceRecordPostShareProcedure,
-			connect.WithSchema(memberServiceRecordPostShareMethodDescriptor),
+			baseURL+MemberServiceCreateBoardQuestionProcedure,
+			connect.WithSchema(memberServiceMethods.ByName("CreateBoardQuestion")),
 			connect.WithClientOptions(opts...),
 		),
-		createBoardThread: connect.NewClient[v1.CreateBoardThreadRequest, v1.CreateBoardThreadResponse](
+		getMyQuestions: connect.NewClient[v1.GetMyQuestionsRequest, v1.GetMyQuestionsResponse](
 			httpClient,
-			baseURL+MemberServiceCreateBoardThreadProcedure,
-			connect.WithSchema(memberServiceCreateBoardThreadMethodDescriptor),
+			baseURL+MemberServiceGetMyQuestionsProcedure,
+			connect.WithSchema(memberServiceMethods.ByName("GetMyQuestions")),
+			connect.WithClientOptions(opts...),
+		),
+		getCurrentUser: connect.NewClient[v1.GetCurrentUserRequest, v1.GetCurrentUserResponse](
+			httpClient,
+			baseURL+MemberServiceGetCurrentUserProcedure,
+			connect.WithSchema(memberServiceMethods.ByName("GetCurrentUser")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -367,38 +262,45 @@ func NewMemberServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 
 // memberServiceClient implements MemberServiceClient.
 type memberServiceClient struct {
-	togglePostReaction *connect.Client[v1.TogglePostReactionRequest, v1.TogglePostReactionResponse]
-	createPostComment  *connect.Client[v1.CreatePostCommentRequest, v1.CreatePostCommentResponse]
-	recordPostShare    *connect.Client[v1.RecordPostShareRequest, v1.RecordPostShareResponse]
-	createBoardThread  *connect.Client[v1.CreateBoardThreadRequest, v1.CreateBoardThreadResponse]
+	toggleReaction      *connect.Client[v1.ToggleReactionRequest, v1.ToggleReactionResponse]
+	createComment       *connect.Client[v1.CreateCommentRequest, v1.CreateCommentResponse]
+	createBoardQuestion *connect.Client[v1.CreateBoardQuestionRequest, v1.CreateBoardQuestionResponse]
+	getMyQuestions      *connect.Client[v1.GetMyQuestionsRequest, v1.GetMyQuestionsResponse]
+	getCurrentUser      *connect.Client[v1.GetCurrentUserRequest, v1.GetCurrentUserResponse]
 }
 
-// TogglePostReaction calls loft.v1.MemberService.TogglePostReaction.
-func (c *memberServiceClient) TogglePostReaction(ctx context.Context, req *connect.Request[v1.TogglePostReactionRequest]) (*connect.Response[v1.TogglePostReactionResponse], error) {
-	return c.togglePostReaction.CallUnary(ctx, req)
+// ToggleReaction calls loft.v1.MemberService.ToggleReaction.
+func (c *memberServiceClient) ToggleReaction(ctx context.Context, req *connect.Request[v1.ToggleReactionRequest]) (*connect.Response[v1.ToggleReactionResponse], error) {
+	return c.toggleReaction.CallUnary(ctx, req)
 }
 
-// CreatePostComment calls loft.v1.MemberService.CreatePostComment.
-func (c *memberServiceClient) CreatePostComment(ctx context.Context, req *connect.Request[v1.CreatePostCommentRequest]) (*connect.Response[v1.CreatePostCommentResponse], error) {
-	return c.createPostComment.CallUnary(ctx, req)
+// CreateComment calls loft.v1.MemberService.CreateComment.
+func (c *memberServiceClient) CreateComment(ctx context.Context, req *connect.Request[v1.CreateCommentRequest]) (*connect.Response[v1.CreateCommentResponse], error) {
+	return c.createComment.CallUnary(ctx, req)
 }
 
-// RecordPostShare calls loft.v1.MemberService.RecordPostShare.
-func (c *memberServiceClient) RecordPostShare(ctx context.Context, req *connect.Request[v1.RecordPostShareRequest]) (*connect.Response[v1.RecordPostShareResponse], error) {
-	return c.recordPostShare.CallUnary(ctx, req)
+// CreateBoardQuestion calls loft.v1.MemberService.CreateBoardQuestion.
+func (c *memberServiceClient) CreateBoardQuestion(ctx context.Context, req *connect.Request[v1.CreateBoardQuestionRequest]) (*connect.Response[v1.CreateBoardQuestionResponse], error) {
+	return c.createBoardQuestion.CallUnary(ctx, req)
 }
 
-// CreateBoardThread calls loft.v1.MemberService.CreateBoardThread.
-func (c *memberServiceClient) CreateBoardThread(ctx context.Context, req *connect.Request[v1.CreateBoardThreadRequest]) (*connect.Response[v1.CreateBoardThreadResponse], error) {
-	return c.createBoardThread.CallUnary(ctx, req)
+// GetMyQuestions calls loft.v1.MemberService.GetMyQuestions.
+func (c *memberServiceClient) GetMyQuestions(ctx context.Context, req *connect.Request[v1.GetMyQuestionsRequest]) (*connect.Response[v1.GetMyQuestionsResponse], error) {
+	return c.getMyQuestions.CallUnary(ctx, req)
+}
+
+// GetCurrentUser calls loft.v1.MemberService.GetCurrentUser.
+func (c *memberServiceClient) GetCurrentUser(ctx context.Context, req *connect.Request[v1.GetCurrentUserRequest]) (*connect.Response[v1.GetCurrentUserResponse], error) {
+	return c.getCurrentUser.CallUnary(ctx, req)
 }
 
 // MemberServiceHandler is an implementation of the loft.v1.MemberService service.
 type MemberServiceHandler interface {
-	TogglePostReaction(context.Context, *connect.Request[v1.TogglePostReactionRequest]) (*connect.Response[v1.TogglePostReactionResponse], error)
-	CreatePostComment(context.Context, *connect.Request[v1.CreatePostCommentRequest]) (*connect.Response[v1.CreatePostCommentResponse], error)
-	RecordPostShare(context.Context, *connect.Request[v1.RecordPostShareRequest]) (*connect.Response[v1.RecordPostShareResponse], error)
-	CreateBoardThread(context.Context, *connect.Request[v1.CreateBoardThreadRequest]) (*connect.Response[v1.CreateBoardThreadResponse], error)
+	ToggleReaction(context.Context, *connect.Request[v1.ToggleReactionRequest]) (*connect.Response[v1.ToggleReactionResponse], error)
+	CreateComment(context.Context, *connect.Request[v1.CreateCommentRequest]) (*connect.Response[v1.CreateCommentResponse], error)
+	CreateBoardQuestion(context.Context, *connect.Request[v1.CreateBoardQuestionRequest]) (*connect.Response[v1.CreateBoardQuestionResponse], error)
+	GetMyQuestions(context.Context, *connect.Request[v1.GetMyQuestionsRequest]) (*connect.Response[v1.GetMyQuestionsResponse], error)
+	GetCurrentUser(context.Context, *connect.Request[v1.GetCurrentUserRequest]) (*connect.Response[v1.GetCurrentUserResponse], error)
 }
 
 // NewMemberServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -407,40 +309,49 @@ type MemberServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewMemberServiceHandler(svc MemberServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	memberServiceTogglePostReactionHandler := connect.NewUnaryHandler(
-		MemberServiceTogglePostReactionProcedure,
-		svc.TogglePostReaction,
-		connect.WithSchema(memberServiceTogglePostReactionMethodDescriptor),
+	memberServiceMethods := v1.File_proto_loft_v1_loft_proto.Services().ByName("MemberService").Methods()
+	memberServiceToggleReactionHandler := connect.NewUnaryHandler(
+		MemberServiceToggleReactionProcedure,
+		svc.ToggleReaction,
+		connect.WithSchema(memberServiceMethods.ByName("ToggleReaction")),
 		connect.WithHandlerOptions(opts...),
 	)
-	memberServiceCreatePostCommentHandler := connect.NewUnaryHandler(
-		MemberServiceCreatePostCommentProcedure,
-		svc.CreatePostComment,
-		connect.WithSchema(memberServiceCreatePostCommentMethodDescriptor),
+	memberServiceCreateCommentHandler := connect.NewUnaryHandler(
+		MemberServiceCreateCommentProcedure,
+		svc.CreateComment,
+		connect.WithSchema(memberServiceMethods.ByName("CreateComment")),
 		connect.WithHandlerOptions(opts...),
 	)
-	memberServiceRecordPostShareHandler := connect.NewUnaryHandler(
-		MemberServiceRecordPostShareProcedure,
-		svc.RecordPostShare,
-		connect.WithSchema(memberServiceRecordPostShareMethodDescriptor),
+	memberServiceCreateBoardQuestionHandler := connect.NewUnaryHandler(
+		MemberServiceCreateBoardQuestionProcedure,
+		svc.CreateBoardQuestion,
+		connect.WithSchema(memberServiceMethods.ByName("CreateBoardQuestion")),
 		connect.WithHandlerOptions(opts...),
 	)
-	memberServiceCreateBoardThreadHandler := connect.NewUnaryHandler(
-		MemberServiceCreateBoardThreadProcedure,
-		svc.CreateBoardThread,
-		connect.WithSchema(memberServiceCreateBoardThreadMethodDescriptor),
+	memberServiceGetMyQuestionsHandler := connect.NewUnaryHandler(
+		MemberServiceGetMyQuestionsProcedure,
+		svc.GetMyQuestions,
+		connect.WithSchema(memberServiceMethods.ByName("GetMyQuestions")),
+		connect.WithHandlerOptions(opts...),
+	)
+	memberServiceGetCurrentUserHandler := connect.NewUnaryHandler(
+		MemberServiceGetCurrentUserProcedure,
+		svc.GetCurrentUser,
+		connect.WithSchema(memberServiceMethods.ByName("GetCurrentUser")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/loft.v1.MemberService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case MemberServiceTogglePostReactionProcedure:
-			memberServiceTogglePostReactionHandler.ServeHTTP(w, r)
-		case MemberServiceCreatePostCommentProcedure:
-			memberServiceCreatePostCommentHandler.ServeHTTP(w, r)
-		case MemberServiceRecordPostShareProcedure:
-			memberServiceRecordPostShareHandler.ServeHTTP(w, r)
-		case MemberServiceCreateBoardThreadProcedure:
-			memberServiceCreateBoardThreadHandler.ServeHTTP(w, r)
+		case MemberServiceToggleReactionProcedure:
+			memberServiceToggleReactionHandler.ServeHTTP(w, r)
+		case MemberServiceCreateCommentProcedure:
+			memberServiceCreateCommentHandler.ServeHTTP(w, r)
+		case MemberServiceCreateBoardQuestionProcedure:
+			memberServiceCreateBoardQuestionHandler.ServeHTTP(w, r)
+		case MemberServiceGetMyQuestionsProcedure:
+			memberServiceGetMyQuestionsHandler.ServeHTTP(w, r)
+		case MemberServiceGetCurrentUserProcedure:
+			memberServiceGetCurrentUserHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -450,26 +361,36 @@ func NewMemberServiceHandler(svc MemberServiceHandler, opts ...connect.HandlerOp
 // UnimplementedMemberServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedMemberServiceHandler struct{}
 
-func (UnimplementedMemberServiceHandler) TogglePostReaction(context.Context, *connect.Request[v1.TogglePostReactionRequest]) (*connect.Response[v1.TogglePostReactionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.MemberService.TogglePostReaction is not implemented"))
+func (UnimplementedMemberServiceHandler) ToggleReaction(context.Context, *connect.Request[v1.ToggleReactionRequest]) (*connect.Response[v1.ToggleReactionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.MemberService.ToggleReaction is not implemented"))
 }
 
-func (UnimplementedMemberServiceHandler) CreatePostComment(context.Context, *connect.Request[v1.CreatePostCommentRequest]) (*connect.Response[v1.CreatePostCommentResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.MemberService.CreatePostComment is not implemented"))
+func (UnimplementedMemberServiceHandler) CreateComment(context.Context, *connect.Request[v1.CreateCommentRequest]) (*connect.Response[v1.CreateCommentResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.MemberService.CreateComment is not implemented"))
 }
 
-func (UnimplementedMemberServiceHandler) RecordPostShare(context.Context, *connect.Request[v1.RecordPostShareRequest]) (*connect.Response[v1.RecordPostShareResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.MemberService.RecordPostShare is not implemented"))
+func (UnimplementedMemberServiceHandler) CreateBoardQuestion(context.Context, *connect.Request[v1.CreateBoardQuestionRequest]) (*connect.Response[v1.CreateBoardQuestionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.MemberService.CreateBoardQuestion is not implemented"))
 }
 
-func (UnimplementedMemberServiceHandler) CreateBoardThread(context.Context, *connect.Request[v1.CreateBoardThreadRequest]) (*connect.Response[v1.CreateBoardThreadResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.MemberService.CreateBoardThread is not implemented"))
+func (UnimplementedMemberServiceHandler) GetMyQuestions(context.Context, *connect.Request[v1.GetMyQuestionsRequest]) (*connect.Response[v1.GetMyQuestionsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.MemberService.GetMyQuestions is not implemented"))
+}
+
+func (UnimplementedMemberServiceHandler) GetCurrentUser(context.Context, *connect.Request[v1.GetCurrentUserRequest]) (*connect.Response[v1.GetCurrentUserResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.MemberService.GetCurrentUser is not implemented"))
 }
 
 // AdminServiceClient is a client for the loft.v1.AdminService service.
 type AdminServiceClient interface {
-	ModerateDeleteComment(context.Context, *connect.Request[v1.ModerateDeleteCommentRequest]) (*connect.Response[v1.ModerateDeleteCommentResponse], error)
-	SetUserBlocked(context.Context, *connect.Request[v1.SetUserBlockedRequest]) (*connect.Response[v1.SetUserBlockedResponse], error)
+	CreatePost(context.Context, *connect.Request[v1.CreatePostRequest]) (*connect.Response[v1.CreatePostResponse], error)
+	UpdatePost(context.Context, *connect.Request[v1.UpdatePostRequest]) (*connect.Response[v1.UpdatePostResponse], error)
+	DeletePost(context.Context, *connect.Request[v1.DeletePostRequest]) (*connect.Response[v1.DeletePostResponse], error)
+	DeleteComment(context.Context, *connect.Request[v1.DeleteCommentRequest]) (*connect.Response[v1.DeleteCommentResponse], error)
+	BlockUser(context.Context, *connect.Request[v1.BlockUserRequest]) (*connect.Response[v1.BlockUserResponse], error)
+	UnblockUser(context.Context, *connect.Request[v1.UnblockUserRequest]) (*connect.Response[v1.UnblockUserResponse], error)
+	GetBoardQuestions(context.Context, *connect.Request[v1.GetBoardQuestionsRequest]) (*connect.Response[v1.GetBoardQuestionsResponse], error)
+	RespondToQuestion(context.Context, *connect.Request[v1.RespondToQuestionRequest]) (*connect.Response[v1.RespondToQuestionResponse], error)
 }
 
 // NewAdminServiceClient constructs a client for the loft.v1.AdminService service. By default, it
@@ -481,17 +402,54 @@ type AdminServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewAdminServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AdminServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	adminServiceMethods := v1.File_proto_loft_v1_loft_proto.Services().ByName("AdminService").Methods()
 	return &adminServiceClient{
-		moderateDeleteComment: connect.NewClient[v1.ModerateDeleteCommentRequest, v1.ModerateDeleteCommentResponse](
+		createPost: connect.NewClient[v1.CreatePostRequest, v1.CreatePostResponse](
 			httpClient,
-			baseURL+AdminServiceModerateDeleteCommentProcedure,
-			connect.WithSchema(adminServiceModerateDeleteCommentMethodDescriptor),
+			baseURL+AdminServiceCreatePostProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("CreatePost")),
 			connect.WithClientOptions(opts...),
 		),
-		setUserBlocked: connect.NewClient[v1.SetUserBlockedRequest, v1.SetUserBlockedResponse](
+		updatePost: connect.NewClient[v1.UpdatePostRequest, v1.UpdatePostResponse](
 			httpClient,
-			baseURL+AdminServiceSetUserBlockedProcedure,
-			connect.WithSchema(adminServiceSetUserBlockedMethodDescriptor),
+			baseURL+AdminServiceUpdatePostProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("UpdatePost")),
+			connect.WithClientOptions(opts...),
+		),
+		deletePost: connect.NewClient[v1.DeletePostRequest, v1.DeletePostResponse](
+			httpClient,
+			baseURL+AdminServiceDeletePostProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("DeletePost")),
+			connect.WithClientOptions(opts...),
+		),
+		deleteComment: connect.NewClient[v1.DeleteCommentRequest, v1.DeleteCommentResponse](
+			httpClient,
+			baseURL+AdminServiceDeleteCommentProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("DeleteComment")),
+			connect.WithClientOptions(opts...),
+		),
+		blockUser: connect.NewClient[v1.BlockUserRequest, v1.BlockUserResponse](
+			httpClient,
+			baseURL+AdminServiceBlockUserProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("BlockUser")),
+			connect.WithClientOptions(opts...),
+		),
+		unblockUser: connect.NewClient[v1.UnblockUserRequest, v1.UnblockUserResponse](
+			httpClient,
+			baseURL+AdminServiceUnblockUserProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("UnblockUser")),
+			connect.WithClientOptions(opts...),
+		),
+		getBoardQuestions: connect.NewClient[v1.GetBoardQuestionsRequest, v1.GetBoardQuestionsResponse](
+			httpClient,
+			baseURL+AdminServiceGetBoardQuestionsProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("GetBoardQuestions")),
+			connect.WithClientOptions(opts...),
+		),
+		respondToQuestion: connect.NewClient[v1.RespondToQuestionRequest, v1.RespondToQuestionResponse](
+			httpClient,
+			baseURL+AdminServiceRespondToQuestionProcedure,
+			connect.WithSchema(adminServiceMethods.ByName("RespondToQuestion")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -499,24 +457,66 @@ func NewAdminServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 
 // adminServiceClient implements AdminServiceClient.
 type adminServiceClient struct {
-	moderateDeleteComment *connect.Client[v1.ModerateDeleteCommentRequest, v1.ModerateDeleteCommentResponse]
-	setUserBlocked        *connect.Client[v1.SetUserBlockedRequest, v1.SetUserBlockedResponse]
+	createPost        *connect.Client[v1.CreatePostRequest, v1.CreatePostResponse]
+	updatePost        *connect.Client[v1.UpdatePostRequest, v1.UpdatePostResponse]
+	deletePost        *connect.Client[v1.DeletePostRequest, v1.DeletePostResponse]
+	deleteComment     *connect.Client[v1.DeleteCommentRequest, v1.DeleteCommentResponse]
+	blockUser         *connect.Client[v1.BlockUserRequest, v1.BlockUserResponse]
+	unblockUser       *connect.Client[v1.UnblockUserRequest, v1.UnblockUserResponse]
+	getBoardQuestions *connect.Client[v1.GetBoardQuestionsRequest, v1.GetBoardQuestionsResponse]
+	respondToQuestion *connect.Client[v1.RespondToQuestionRequest, v1.RespondToQuestionResponse]
 }
 
-// ModerateDeleteComment calls loft.v1.AdminService.ModerateDeleteComment.
-func (c *adminServiceClient) ModerateDeleteComment(ctx context.Context, req *connect.Request[v1.ModerateDeleteCommentRequest]) (*connect.Response[v1.ModerateDeleteCommentResponse], error) {
-	return c.moderateDeleteComment.CallUnary(ctx, req)
+// CreatePost calls loft.v1.AdminService.CreatePost.
+func (c *adminServiceClient) CreatePost(ctx context.Context, req *connect.Request[v1.CreatePostRequest]) (*connect.Response[v1.CreatePostResponse], error) {
+	return c.createPost.CallUnary(ctx, req)
 }
 
-// SetUserBlocked calls loft.v1.AdminService.SetUserBlocked.
-func (c *adminServiceClient) SetUserBlocked(ctx context.Context, req *connect.Request[v1.SetUserBlockedRequest]) (*connect.Response[v1.SetUserBlockedResponse], error) {
-	return c.setUserBlocked.CallUnary(ctx, req)
+// UpdatePost calls loft.v1.AdminService.UpdatePost.
+func (c *adminServiceClient) UpdatePost(ctx context.Context, req *connect.Request[v1.UpdatePostRequest]) (*connect.Response[v1.UpdatePostResponse], error) {
+	return c.updatePost.CallUnary(ctx, req)
+}
+
+// DeletePost calls loft.v1.AdminService.DeletePost.
+func (c *adminServiceClient) DeletePost(ctx context.Context, req *connect.Request[v1.DeletePostRequest]) (*connect.Response[v1.DeletePostResponse], error) {
+	return c.deletePost.CallUnary(ctx, req)
+}
+
+// DeleteComment calls loft.v1.AdminService.DeleteComment.
+func (c *adminServiceClient) DeleteComment(ctx context.Context, req *connect.Request[v1.DeleteCommentRequest]) (*connect.Response[v1.DeleteCommentResponse], error) {
+	return c.deleteComment.CallUnary(ctx, req)
+}
+
+// BlockUser calls loft.v1.AdminService.BlockUser.
+func (c *adminServiceClient) BlockUser(ctx context.Context, req *connect.Request[v1.BlockUserRequest]) (*connect.Response[v1.BlockUserResponse], error) {
+	return c.blockUser.CallUnary(ctx, req)
+}
+
+// UnblockUser calls loft.v1.AdminService.UnblockUser.
+func (c *adminServiceClient) UnblockUser(ctx context.Context, req *connect.Request[v1.UnblockUserRequest]) (*connect.Response[v1.UnblockUserResponse], error) {
+	return c.unblockUser.CallUnary(ctx, req)
+}
+
+// GetBoardQuestions calls loft.v1.AdminService.GetBoardQuestions.
+func (c *adminServiceClient) GetBoardQuestions(ctx context.Context, req *connect.Request[v1.GetBoardQuestionsRequest]) (*connect.Response[v1.GetBoardQuestionsResponse], error) {
+	return c.getBoardQuestions.CallUnary(ctx, req)
+}
+
+// RespondToQuestion calls loft.v1.AdminService.RespondToQuestion.
+func (c *adminServiceClient) RespondToQuestion(ctx context.Context, req *connect.Request[v1.RespondToQuestionRequest]) (*connect.Response[v1.RespondToQuestionResponse], error) {
+	return c.respondToQuestion.CallUnary(ctx, req)
 }
 
 // AdminServiceHandler is an implementation of the loft.v1.AdminService service.
 type AdminServiceHandler interface {
-	ModerateDeleteComment(context.Context, *connect.Request[v1.ModerateDeleteCommentRequest]) (*connect.Response[v1.ModerateDeleteCommentResponse], error)
-	SetUserBlocked(context.Context, *connect.Request[v1.SetUserBlockedRequest]) (*connect.Response[v1.SetUserBlockedResponse], error)
+	CreatePost(context.Context, *connect.Request[v1.CreatePostRequest]) (*connect.Response[v1.CreatePostResponse], error)
+	UpdatePost(context.Context, *connect.Request[v1.UpdatePostRequest]) (*connect.Response[v1.UpdatePostResponse], error)
+	DeletePost(context.Context, *connect.Request[v1.DeletePostRequest]) (*connect.Response[v1.DeletePostResponse], error)
+	DeleteComment(context.Context, *connect.Request[v1.DeleteCommentRequest]) (*connect.Response[v1.DeleteCommentResponse], error)
+	BlockUser(context.Context, *connect.Request[v1.BlockUserRequest]) (*connect.Response[v1.BlockUserResponse], error)
+	UnblockUser(context.Context, *connect.Request[v1.UnblockUserRequest]) (*connect.Response[v1.UnblockUserResponse], error)
+	GetBoardQuestions(context.Context, *connect.Request[v1.GetBoardQuestionsRequest]) (*connect.Response[v1.GetBoardQuestionsResponse], error)
+	RespondToQuestion(context.Context, *connect.Request[v1.RespondToQuestionRequest]) (*connect.Response[v1.RespondToQuestionResponse], error)
 }
 
 // NewAdminServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -525,24 +525,73 @@ type AdminServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewAdminServiceHandler(svc AdminServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	adminServiceModerateDeleteCommentHandler := connect.NewUnaryHandler(
-		AdminServiceModerateDeleteCommentProcedure,
-		svc.ModerateDeleteComment,
-		connect.WithSchema(adminServiceModerateDeleteCommentMethodDescriptor),
+	adminServiceMethods := v1.File_proto_loft_v1_loft_proto.Services().ByName("AdminService").Methods()
+	adminServiceCreatePostHandler := connect.NewUnaryHandler(
+		AdminServiceCreatePostProcedure,
+		svc.CreatePost,
+		connect.WithSchema(adminServiceMethods.ByName("CreatePost")),
 		connect.WithHandlerOptions(opts...),
 	)
-	adminServiceSetUserBlockedHandler := connect.NewUnaryHandler(
-		AdminServiceSetUserBlockedProcedure,
-		svc.SetUserBlocked,
-		connect.WithSchema(adminServiceSetUserBlockedMethodDescriptor),
+	adminServiceUpdatePostHandler := connect.NewUnaryHandler(
+		AdminServiceUpdatePostProcedure,
+		svc.UpdatePost,
+		connect.WithSchema(adminServiceMethods.ByName("UpdatePost")),
+		connect.WithHandlerOptions(opts...),
+	)
+	adminServiceDeletePostHandler := connect.NewUnaryHandler(
+		AdminServiceDeletePostProcedure,
+		svc.DeletePost,
+		connect.WithSchema(adminServiceMethods.ByName("DeletePost")),
+		connect.WithHandlerOptions(opts...),
+	)
+	adminServiceDeleteCommentHandler := connect.NewUnaryHandler(
+		AdminServiceDeleteCommentProcedure,
+		svc.DeleteComment,
+		connect.WithSchema(adminServiceMethods.ByName("DeleteComment")),
+		connect.WithHandlerOptions(opts...),
+	)
+	adminServiceBlockUserHandler := connect.NewUnaryHandler(
+		AdminServiceBlockUserProcedure,
+		svc.BlockUser,
+		connect.WithSchema(adminServiceMethods.ByName("BlockUser")),
+		connect.WithHandlerOptions(opts...),
+	)
+	adminServiceUnblockUserHandler := connect.NewUnaryHandler(
+		AdminServiceUnblockUserProcedure,
+		svc.UnblockUser,
+		connect.WithSchema(adminServiceMethods.ByName("UnblockUser")),
+		connect.WithHandlerOptions(opts...),
+	)
+	adminServiceGetBoardQuestionsHandler := connect.NewUnaryHandler(
+		AdminServiceGetBoardQuestionsProcedure,
+		svc.GetBoardQuestions,
+		connect.WithSchema(adminServiceMethods.ByName("GetBoardQuestions")),
+		connect.WithHandlerOptions(opts...),
+	)
+	adminServiceRespondToQuestionHandler := connect.NewUnaryHandler(
+		AdminServiceRespondToQuestionProcedure,
+		svc.RespondToQuestion,
+		connect.WithSchema(adminServiceMethods.ByName("RespondToQuestion")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/loft.v1.AdminService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case AdminServiceModerateDeleteCommentProcedure:
-			adminServiceModerateDeleteCommentHandler.ServeHTTP(w, r)
-		case AdminServiceSetUserBlockedProcedure:
-			adminServiceSetUserBlockedHandler.ServeHTTP(w, r)
+		case AdminServiceCreatePostProcedure:
+			adminServiceCreatePostHandler.ServeHTTP(w, r)
+		case AdminServiceUpdatePostProcedure:
+			adminServiceUpdatePostHandler.ServeHTTP(w, r)
+		case AdminServiceDeletePostProcedure:
+			adminServiceDeletePostHandler.ServeHTTP(w, r)
+		case AdminServiceDeleteCommentProcedure:
+			adminServiceDeleteCommentHandler.ServeHTTP(w, r)
+		case AdminServiceBlockUserProcedure:
+			adminServiceBlockUserHandler.ServeHTTP(w, r)
+		case AdminServiceUnblockUserProcedure:
+			adminServiceUnblockUserHandler.ServeHTTP(w, r)
+		case AdminServiceGetBoardQuestionsProcedure:
+			adminServiceGetBoardQuestionsHandler.ServeHTTP(w, r)
+		case AdminServiceRespondToQuestionProcedure:
+			adminServiceRespondToQuestionHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -552,10 +601,104 @@ func NewAdminServiceHandler(svc AdminServiceHandler, opts ...connect.HandlerOpti
 // UnimplementedAdminServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedAdminServiceHandler struct{}
 
-func (UnimplementedAdminServiceHandler) ModerateDeleteComment(context.Context, *connect.Request[v1.ModerateDeleteCommentRequest]) (*connect.Response[v1.ModerateDeleteCommentResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.AdminService.ModerateDeleteComment is not implemented"))
+func (UnimplementedAdminServiceHandler) CreatePost(context.Context, *connect.Request[v1.CreatePostRequest]) (*connect.Response[v1.CreatePostResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.AdminService.CreatePost is not implemented"))
 }
 
-func (UnimplementedAdminServiceHandler) SetUserBlocked(context.Context, *connect.Request[v1.SetUserBlockedRequest]) (*connect.Response[v1.SetUserBlockedResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.AdminService.SetUserBlocked is not implemented"))
+func (UnimplementedAdminServiceHandler) UpdatePost(context.Context, *connect.Request[v1.UpdatePostRequest]) (*connect.Response[v1.UpdatePostResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.AdminService.UpdatePost is not implemented"))
+}
+
+func (UnimplementedAdminServiceHandler) DeletePost(context.Context, *connect.Request[v1.DeletePostRequest]) (*connect.Response[v1.DeletePostResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.AdminService.DeletePost is not implemented"))
+}
+
+func (UnimplementedAdminServiceHandler) DeleteComment(context.Context, *connect.Request[v1.DeleteCommentRequest]) (*connect.Response[v1.DeleteCommentResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.AdminService.DeleteComment is not implemented"))
+}
+
+func (UnimplementedAdminServiceHandler) BlockUser(context.Context, *connect.Request[v1.BlockUserRequest]) (*connect.Response[v1.BlockUserResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.AdminService.BlockUser is not implemented"))
+}
+
+func (UnimplementedAdminServiceHandler) UnblockUser(context.Context, *connect.Request[v1.UnblockUserRequest]) (*connect.Response[v1.UnblockUserResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.AdminService.UnblockUser is not implemented"))
+}
+
+func (UnimplementedAdminServiceHandler) GetBoardQuestions(context.Context, *connect.Request[v1.GetBoardQuestionsRequest]) (*connect.Response[v1.GetBoardQuestionsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.AdminService.GetBoardQuestions is not implemented"))
+}
+
+func (UnimplementedAdminServiceHandler) RespondToQuestion(context.Context, *connect.Request[v1.RespondToQuestionRequest]) (*connect.Response[v1.RespondToQuestionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.AdminService.RespondToQuestion is not implemented"))
+}
+
+// AuthServiceClient is a client for the loft.v1.AuthService service.
+type AuthServiceClient interface {
+	SyncUser(context.Context, *connect.Request[v1.SyncUserRequest]) (*connect.Response[v1.SyncUserResponse], error)
+}
+
+// NewAuthServiceClient constructs a client for the loft.v1.AuthService service. By default, it uses
+// the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and sends
+// uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
+// connect.WithGRPCWeb() options.
+//
+// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
+// http://api.acme.com or https://acme.com/grpc).
+func NewAuthServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AuthServiceClient {
+	baseURL = strings.TrimRight(baseURL, "/")
+	authServiceMethods := v1.File_proto_loft_v1_loft_proto.Services().ByName("AuthService").Methods()
+	return &authServiceClient{
+		syncUser: connect.NewClient[v1.SyncUserRequest, v1.SyncUserResponse](
+			httpClient,
+			baseURL+AuthServiceSyncUserProcedure,
+			connect.WithSchema(authServiceMethods.ByName("SyncUser")),
+			connect.WithClientOptions(opts...),
+		),
+	}
+}
+
+// authServiceClient implements AuthServiceClient.
+type authServiceClient struct {
+	syncUser *connect.Client[v1.SyncUserRequest, v1.SyncUserResponse]
+}
+
+// SyncUser calls loft.v1.AuthService.SyncUser.
+func (c *authServiceClient) SyncUser(ctx context.Context, req *connect.Request[v1.SyncUserRequest]) (*connect.Response[v1.SyncUserResponse], error) {
+	return c.syncUser.CallUnary(ctx, req)
+}
+
+// AuthServiceHandler is an implementation of the loft.v1.AuthService service.
+type AuthServiceHandler interface {
+	SyncUser(context.Context, *connect.Request[v1.SyncUserRequest]) (*connect.Response[v1.SyncUserResponse], error)
+}
+
+// NewAuthServiceHandler builds an HTTP handler from the service implementation. It returns the path
+// on which to mount the handler and the handler itself.
+//
+// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
+// and JSON codecs. They also support gzip compression.
+func NewAuthServiceHandler(svc AuthServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	authServiceMethods := v1.File_proto_loft_v1_loft_proto.Services().ByName("AuthService").Methods()
+	authServiceSyncUserHandler := connect.NewUnaryHandler(
+		AuthServiceSyncUserProcedure,
+		svc.SyncUser,
+		connect.WithSchema(authServiceMethods.ByName("SyncUser")),
+		connect.WithHandlerOptions(opts...),
+	)
+	return "/loft.v1.AuthService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case AuthServiceSyncUserProcedure:
+			authServiceSyncUserHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
+}
+
+// UnimplementedAuthServiceHandler returns CodeUnimplemented from all methods.
+type UnimplementedAuthServiceHandler struct{}
+
+func (UnimplementedAuthServiceHandler) SyncUser(context.Context, *connect.Request[v1.SyncUserRequest]) (*connect.Response[v1.SyncUserResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("loft.v1.AuthService.SyncUser is not implemented"))
 }

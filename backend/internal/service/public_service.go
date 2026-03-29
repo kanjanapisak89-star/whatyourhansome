@@ -31,10 +31,10 @@ func (s *PublicService) GetFeed(
 		page = 1
 	}
 	
-	offset := (page - 1) * pageSize
+	_ = (page - 1) * pageSize // offset - will be used when implementing real queries
 	
 	// Get viewer user ID from context (optional for guests)
-	viewerUserID := GetUserIDFromContext(ctx)
+	_ = GetUserIDFromContext(ctx) // viewerUserID - will be used for user_has_reacted field
 	
 	// TODO: Query posts with sqlc generated code
 	// For now, return mock data
