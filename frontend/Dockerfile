@@ -16,8 +16,8 @@ RUN flutter pub get
 # Copy source code
 COPY . .
 
-# Create .env file from environment variable
-RUN echo "API_BASE_URL=$API_BASE_URL" > .env
+# For web builds, environment variables should be set at compile time
+# or passed as constants. We don't create .env files for web deployment.
 
 # Enable web platform
 RUN flutter config --enable-web
