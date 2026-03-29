@@ -18,9 +18,19 @@ type FirebaseVerifier struct {
 // NewFirebaseVerifier uses Application Default Credentials or GOOGLE_APPLICATION_CREDENTIALS.
 func NewFirebaseVerifier(ctx context.Context, credentialsFile string) (*FirebaseVerifier, error) {
 	var opts []option.ClientOption
-	if strings.TrimSpace(credentialsFile) != "" {
-		opts = append(opts, option.WithCredentialsFile(credentialsFile))
+	creds := strings.TrimSpace(credentialsFile)
+	
+	if creds != "" {
+		// Check if it's JSON content (starts with {) or a file path
+		if strings.HasPrefix(creds, "{") {
+			// It's JSON content, use it directly
+			opts = append(opts, option.WithCredentialsJSON([]byte(creds)))
+		} else {
+			// It's a file path
+			opts = append(opts, option.WithCredentialsFile(creds))
+		}
 	}
+	
 	app, err := firebase.NewApp(ctx, nil, opts...)
 	if err != nil {
 		return nil, fmt.Errorf("firebase app: %w", err)
